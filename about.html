@@ -1,12 +1,332 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>About Me</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>About Me</h1>
-    <p>This is the about page of my first website.</p>
-    <a href="index.html">Go Back Home</a>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About LOTSTE - Science Technology Engineering</title>
+    <meta name="description" content="Learn about LOTSTE's mission, values, and the team pioneering the future of aerospace and technology.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0F172A; /* Slate 900 */
+            --bg-medium: #1E293B; /* Slate 800 */
+            --bg-light: #334155; /* Slate 700 */
+            --text-primary: #F1F5F9; /* Slate 100 */
+            --text-secondary: #94A3B8; /* Slate 400 */
+            --accent-primary: #38BDF8; /* Sky 400 */
+            --accent-secondary: #6366F1; /* Indigo 500 */
+        }
+
+        /* --- BASIC SETUP --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        main {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- STICKY NAVIGATION --- */
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--bg-medium);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-primary);
+        }
+
+        /* --- GENERAL SECTION STYLING --- */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1.page-title, h2.section-title {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        h1.page-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        p.page-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+        }
+
+        h2.section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* --- OUR STORY SECTION --- */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .story-text p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .story-image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(45deg, var(--bg-medium), var(--bg-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* --- VALUES SECTION --- */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .value-card {
+            background-color: var(--bg-medium);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+        }
+
+        .value-card h3 {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- TEAM SECTION --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background-color: var(--bg-medium);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .team-photo-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .team-card h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+        
+        .team-card p {
+            margin: 0;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--bg-medium);
+        }
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .story-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">LOTSTE</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="#">Services</a></li> <li><a href="#">Careers</a></li> <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="container">
+            <h1 class="page-title">Pioneering Progress</h1>
+            <p class="page-subtitle">We are a collective of engineers, scientists, and visionaries dedicated to solving humanity's most complex challenges through technology and first-principles thinking.</p>
+        </section>
+
+        <section class="container">
+            <div class="story-grid">
+                <div class="story-text">
+                    <h2 class="section-title" style="text-align: left;">Our Story</h2>
+                    <p>
+                        LOTSTE was founded in 2023 on the belief that the biggest hurdles in aerospace and robotics are opportunities for groundbreaking innovation. Our journey began in a small lab with a shared mission: to build smarter, more efficient, and more reliable systems. Today, we've grown into a dynamic team that continues to push the boundaries of what's possible, turning ambitious ideas into tangible realities.
+                    </p>
+                </div>
+                <div class="story-image-placeholder"></div>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Innovation</h3>
+                    <p>We are driven by curiosity and a relentless pursuit of novel solutions.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>We operate with transparency and uphold the highest ethical standards in all we do.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Collaboration</h3>
+                    <p>We believe the best results come from diverse teams working together openly.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Excellence</h3>
+                    <p>We are committed to rigorous engineering and delivering exceptional quality.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="container">
+            <h2 class="section-title">Meet Our Leadership</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo-placeholder"></div>
+                    <h3>Dr. Evelyn Reed</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo-placeholder"></div>
+                    <h3>Ben Carter</h3>
+                    <p>Chief Technology Officer</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo-placeholder"></div>
+                    <h3>Aisha Khan</h3>
+                    <p>Head of Robotics</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo-placeholder"></div>
+                    <h3>Marco Diaz</h3>
+                    <p>Lead Propulsion Engineer</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p class="copyright">&copy; 2025 LOTSTE. All Rights Reserved.</p>
+    </footer>
+
+</body>
 </html>

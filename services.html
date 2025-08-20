@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - LOTSTE</title>
+    <meta name="description" content="Explore the services offered by LOTSTE, including rocketry, unmanned aerial vehicles, AI in aerospace, software, and robotics.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0F172A; /* Slate 900 */
+            --bg-medium: #1E293B; /* Slate 800 */
+            --bg-light: #334155; /* Slate 700 */
+            --text-primary: #F1F5F9; /* Slate 100 */
+            --text-secondary: #94A3B8; /* Slate 400 */
+            --accent-primary: #38BDF8; /* Sky 400 */
+            --accent-secondary: #6366F1; /* Indigo 500 */
+        }
+
+        /* --- BASIC SETUP --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        main {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- STICKY NAVIGATION --- */
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--bg-medium);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-primary);
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        h1.page-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        p.page-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- SERVICES DETAIL SECTION --- */
+        .service-section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--bg-medium);
+        }
+
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        /* Modifier to alternate layout */
+        .service-detail-grid.reverse {
+            grid-template-areas: "image text";
+        }
+        .service-detail-grid.reverse .service-text {
+            grid-area: text;
+        }
+        .service-detail-grid.reverse .service-image-placeholder {
+            grid-area: image;
+        }
+
+        .service-image-placeholder {
+            width: 100%;
+            height: 350px;
+            background-color: var(--bg-medium);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .service-text h2 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+        
+        .service-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .capabilities-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+        .capabilities-list li {
+            position: relative;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        .capabilities-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: var(--accent-primary);
+            color: var(--bg-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--bg-medium);
+        }
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 900px) {
+            .service-detail-grid,
+            .service-detail-grid.reverse {
+                grid-template-columns: 1fr;
+                grid-template-areas: unset !important;
+                gap: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">LOTSTE</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="#">Careers</a></li> <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <header class="page-header container">
+            <h1 class="page-title">End-to-End Capabilities</h1>
+            <p class="page-subtitle">We offer a comprehensive suite of services, transforming ambitious concepts into fully operational systems with precision, reliability, and innovation.</p>
+        </header>
+
+        <section class="service-section container">
+            <div class="service-detail-grid">
+                <div class="service-text">
+                    <h2>Rocketry & Propulsion</h2>
+                    <p>We specialize in the design, analysis, and manufacturing of advanced propulsion systems. From initial concept to launch-day support, our team ensures maximum efficiency and reliability for every mission.</p>
+                    <ul class="capabilities-list">
+                        <li>Liquid & Solid Propulsion System Design</li>
+                        <li>Avionics, Guidance, & Control Systems</li>
+                        <li>Structural Analysis & Thermal Management</li>
+                        <li>Launch Logistics & Mission Support</li>
+                    </ul>
+                </div>
+                <div class="service-image-placeholder"></div>
+            </div>
+        </section>
+        
+        <section class="service-section container">
+            <div class="service-detail-grid reverse">
+                <div class="service-text">
+                    <h2>Unmanned Aerial Vehicles</h2>
+                    <p>Our expertise lies in creating mission-specific UAV platforms with a focus on autonomy and endurance. We integrate cutting-edge sensors and communication systems to deliver actionable data from the sky.</p>
+                    <ul class="capabilities-list">
+                        <li>Autonomous Navigation & Pathfinding</li>
+                        <li>Advanced Sensor & Payload Integration</li>
+                        <li>Long-Endurance Airframe Design</li>
+                        <li>Swarm Intelligence & Fleet Management</li>
+                    </ul>
+                </div>
+                <div class="service-image-placeholder"></div>
+            </div>
+        </section>
+
+        <section class="service-section container">
+            <div class="service-detail-grid">
+                <div class="service-text">
+                    <h2>Digital Engineering & AI</h2>
+                    <p>By harnessing the power of digital twins, machine learning, and data fusion, we build intelligent aerospace systems that can predict, adapt, and self-optimize, dramatically enhancing performance and safety.</p>
+                    <ul class="capabilities-list">
+                        <li>Digital Twin Simulation & Modeling</li>
+                        <li>AI-Powered Predictive Maintenance</li>
+                        <li>Autonomous Flight Control Algorithms</li>
+                        <li>Real-Time Data Fusion & Analysis</li>
+                    </ul>
+                </div>
+                <div class="service-image-placeholder">[Abstract visualization of AI data streams]</div>
+            </div>
+        </section>
+
+        <section class="service-section container">
+            <div class="service-detail-grid reverse">
+                <div class="service-text">
+                    <h2>Software Development</h2>
+                    <p>We build the mission-critical software that powers modern engineering. Our solutions range from embedded systems on vehicles to secure, scalable cloud platforms for data processing and ground control operations.</p>
+                    <ul class="capabilities-list">
+                        <li>Mission-Critical Ground Control Software</li>
+                        <li>Real-Time Embedded & Flight Systems</li>
+                        <li>Secure Cloud Architecture & DevOps</li>
+                        <li>Big Data Analytics Platforms</li>
+                    </ul>
+                </div>
+                <div class="service-image-placeholder"></div>
+            </div>
+        </section>
+
+        <section class="service-section container">
+            <div class="service-detail-grid">
+                <div class="service-text">
+                    <h2>Advanced Robotics</h2>
+                    <p>Our robotics solutions are designed for precision and reliability in the most demanding environments. We develop everything from automated manufacturing systems to autonomous rovers for exploration and logistics.</p>
+                    <ul class="capabilities-list">
+                        <li>Industrial Automation & Precision Assembly</li>
+                        <li>Autonomous Exploration & Planetary Rovers</li>
+                        <li>Telerobotics & Human-Machine Interfaces</li>
+                        <li>AI-Powered Perception & Actuation</li>
+                    </ul>
+                </div>
+                <div class="service-image-placeholder"></div>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <h2>Have a project in mind?</h2>
+            <p class="page-subtitle">Let's discuss how our expertise can help you achieve your goals.</p>
+            <a href="index.html#contact" class="cta-button">Contact Our Experts</a>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p class="copyright">&copy; 2025 LOTSTE. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

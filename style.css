@@ -4,6 +4,11 @@ body {
   text-align: center;
   padding-top: 50px;
 }
+.nav-logo img {
+  height: 40px; /* Adjust this value to fit your logo's proportions */
+  width: auto;
+  display: block; /* Removes extra space below the image */
+}
 
 h1 {
   color: #0077cc;
