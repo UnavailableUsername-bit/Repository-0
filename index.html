@@ -1,331 +1,532 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOTSTE - Science Technology Engineering</title>
-<meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics.">
-<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-<link rel="preconnect" href="[https://fonts.gstatic](https://fonts.gstatic)" crossorigin>
-<link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Oswald:wght@700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Oswald:wght@700&display=swap)" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LOTSTE – Science • Technology • Engineering</title>
+<meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
 
 <style>
+  :root {
+    /* Palette */
+    --bg: #f7f9fc;
+    --bg-elev: #ffffff;
+    --text: #0f172a;          /* slate-900 */
+    --muted: #5b6577;         /* slate-500/600 */
+    --border: #e5e7eb;        /* gray-200 */
+    --primary: #0ea5e9;       /* sky-500 */
+    --primary-2: #6366f1;     /* indigo-500 */
+    --success: #10b981;
+
+    /* Effects */
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 6px 24px rgba(2, 6, 23, 0.08);
+    --shadow-lg: 0 20px 50px rgba(2, 6, 23, 0.10);
+
+    /* Radii & spacing */
+    --radius: 14px;
+    --radius-lg: 18px;
+    --radius-pill: 999px;
+    --content-max: 1200px;
+  }
+
+  @media (prefers-color-scheme: dark) {
     :root {
-        --bg-light: #f8f9fa;
-        --bg-card: #ffffff;
-        --text-dark: #212529;
-        --text-muted: #6c757d;
-        --accent-primary: #0ea5e9;
-        --accent-secondary: #6366F1;
-        --border-color: #dee2e6;
+      --bg: #0b1220;          /* deep navy */
+      --bg-elev: #0f172a;      /* slate-900 */
+      --text: #e5e7eb;        /* gray-200 */
+      --muted: #94a3b8;        /* slate-400 */
+      --border: #1f2937;      /* gray-800 */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
+      --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
+  }
 
-    /* --- BASIC SETUP --- */
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; overflow-x: hidden; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+  /* Base */
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .container { max-width: var(--content-max); margin: 0 auto; padding: 0 1.5rem; }
 
-    /* --- STICKY NAVIGATION --- */
-    nav { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: rgba(248, 249, 250, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    .nav-logo img { height: 40px; width: auto; display: block; }
-    .nav-links { list-style: none; padding: 0; margin: 0; display: flex; gap: 1.5rem; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent-primary); }
-    .hamburger-menu { display: none; flex-direction: column; justify-content: space-around; width: 2rem; height: 2rem; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1001; }
-    .hamburger-menu .bar { width: 2rem; height: 2px; background-color: var(--text-dark); border-radius: 10px; transition: all 0.3s linear; }
+  /* Utilities */
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; }
+  .section { padding: clamp(3.5rem, 6vw, 6rem) 0; }
+  .subtle { color: var(--muted); }
 
-    /* --- SCROLL ANIMATION STYLES --- */
-    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+  /* Hero */
+  .hero { position: relative; min-height: 95vh; display: grid; place-items: center; text-align: center; }
+  .hero-bg {
+    position: absolute; inset: -20vh -10vw -10vh -10vw; z-index: -1; filter: blur(60px) saturate(1.2);
+    background:
+      radial-gradient(35% 40% at 22% 28%, color-mix(in oklab, var(--primary) 55%, transparent) 0%, transparent 60%),
+      radial-gradient(40% 45% at 78% 22%, color-mix(in oklab, var(--primary-2) 45%, transparent) 0%, transparent 65%),
+      radial-gradient(50% 50% at 50% 90%, color-mix(in oklab, #22d3ee 35%, transparent) 0%, transparent 60%);
+    opacity: .9;
+  }
+  .hero-inner { padding-top: 2.2rem; }
+  .hero-logo { width: min(860px, 82vw); margin-inline: auto; animation: fadeUp .9s ease both; }
+  .hero-logo img { width: 100%; height: auto; display: block; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1.5rem; animation: fadeUp .9s ease .15s both; }
 
-    /* --- GENERAL SECTION & BUTTON STYLING --- */
-    section { padding: 6rem 0; text-align: center; }
-    h2.section-title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; }
-    p.section-subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 3rem auto; line-height: 1.7; }
-    .button { display: inline-block; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: #fff; padding: 0.9rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 700; border: none; transition: transform 0.3s, box-shadow 0.3s; }
-    .button:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 30px rgba(14, 165, 233, 0.25); }
+  /* Buttons */
+  .btn {
+    --btn-bg: linear-gradient(90deg, var(--primary), var(--primary-2));
+    display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    padding: 0.9rem 1.25rem; border-radius: var(--radius-pill); color: white; font-weight: 700;
+    box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 28%, transparent);
+    border: none; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; background: var(--btn-bg);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px color-mix(in oklab, var(--primary) 32%, transparent); }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+  .btn.ghost:hover { background: color-mix(in oklab, var(--primary) 10%, transparent); }
+  /* Button size/shape variants */
+  .btn.btn--sm { padding: .55rem .85rem; font-size: .9rem; }
+  .btn.round { border-radius: 50%; width: 44px; height: 44px; padding: 0; display: grid; place-items: center; }
 
-    /* --- HERO SECTION --- */
-    .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 2rem; position: relative; overflow: hidden; }
-    .hero-background { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; background: linear-gradient(45deg, #e0f7fa, #e8eaf6, #ede7f6); background-size: 400% 400%; animation: gradientAnimation 15s ease infinite; }
-    @keyframes gradientAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    
-    .hero-logo-container {
-        width: 80%; /* 10% margin on each side */
-        max-width: 1200px; /* Optional: maximum width for very large screens */
-        margin: 5rem auto 2rem auto; /* Adjust top margin as needed */
-        animation: logoFadeIn 1s ease-out;
-    }
-    
-    .hero-logo-container img {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-    
-    @keyframes logoFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  /* Section headings */
+  .section-title {
+    font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.6rem); letter-spacing: 0.2px; margin: 0 0 .4rem;
+    background: linear-gradient(90deg, var(--text), color-mix(in oklab, var(--text) 80%, var(--primary)));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .section-subtitle { max-width: 760px; margin: 0.25rem auto 2.4rem; color: var(--muted); font-size: 1.075rem; }
 
-    .hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2.5rem; animation: buttonsFadeIn 1s ease-out 0.4s backwards; }
-    @keyframes buttonsFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  /* Capabilities */
+  .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .cap-card {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.6rem; text-align: left; box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .cap-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--primary) 35%, var(--border)); }
+  .cap-card h3 { margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: .55rem; }
+  /* Enhanced capabilities visuals */
+  #capabilities { position: relative; }
+  #capabilities::before { content: ""; position: absolute; left: -10%; right: -10%; top: 0; height: 220px; background:
+    radial-gradient(40% 60% at 20% 20%, color-mix(in oklab, var(--primary) 20%, transparent) 0%, transparent 70%),
+    radial-gradient(30% 50% at 80% 10%, color-mix(in oklab, var(--primary-2) 18%, transparent) 0%, transparent 70%);
+    filter: blur(30px); opacity: .65; z-index: -1; }
 
-    /* --- END-TO-END CAPABILITIES --- */
-    .capabilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; text-align: left; }
-    .capability-card { background-color: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s, box-shadow 0.3s; }
-    .capability-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-    .capability-card h3 { font-size: 1.2rem; font-weight: 700; margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
-    .is-visible .capability-card:nth-child(1) { transition-delay: 0.1s; }
-    .is-visible .capability-card:nth-child(2) { transition-delay: 0.2s; }
-    .is-visible .capability-card:nth-child(3) { transition-delay: 0.3s; }
-    .is-visible .capability-card:nth-child(4) { transition-delay: 0.4s; }
-    .is-visible .capability-card:nth-child(5) { transition-delay: 0.5s; }
+  .cap-card { position: relative; overflow: hidden; }
+  .cap-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--card-accent, var(--primary)), transparent); }
+  .cap-card .icon-badge { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; background: color-mix(in oklab, var(--card-accent, var(--primary)) 16%, transparent); border: 1px solid color-mix(in oklab, var(--card-accent, var(--primary)) 50%, var(--border)); box-shadow: var(--shadow-sm); }
+  .cap-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--card-accent) 35%, var(--border)); }
+  .cap-title { font-weight: 800; letter-spacing: .2px; }
 
-    /* --- CAROUSEL PROJECT SECTION --- */
-    #projects .carousel { position: relative; background-color: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; margin-top: 2rem; }
-    #projects .carousel-track-container { overflow: hidden; }
-    #projects .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-    #projects .carousel-slide { width: 100%; flex-shrink: 0; box-sizing: border-box; padding: 2.5rem; }
-    #projects .project-placeholder { background: linear-gradient(45deg, #e9ecef, #f8f9fa); color: var(--text-muted); border-radius: 12px; height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 1.5rem; border: 1px solid var(--border-color); }
-    #projects .project-placeholder h3 { margin: 0 0 0.5rem 0; color: var(--text-dark); }
-    #projects .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255,255,255,0.9); border: 1px solid var(--border-color); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    #projects .carousel-button:hover { background-color: #fff; transform: translateY(-50%) scale(1.1); }
-    #projects .carousel-button.prev { left: 1.5rem; }
-    #projects .carousel-button.next { right: 1.5rem; }
-    #projects .carousel-nav { display: flex; justify-content: center; gap: 0.75rem; padding: 1.5rem 0 1rem 0; }
-    #projects .carousel-indicator { width: 12px; height: 12px; border-radius: 50%; background-color: var(--border-color); border: none; cursor: pointer; transition: all 0.3s; }
-    #projects .carousel-indicator.current-slide { background-color: var(--accent-primary); transform: scale(1.2); }
+  .cap-card:nth-child(1) { --card-accent: #0ea5e9; }
+  .cap-card:nth-child(2) { --card-accent: #22c55e; }
+  .cap-card:nth-child(3) { --card-accent: #6366f1; }
+  .cap-card:nth-child(4) { --card-accent: #f59e0b; }
+  .cap-card:nth-child(5) { --card-accent: #ef4444; }
 
-    /* --- CONTACT US --- */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; background-color: var(--bg-card); padding: 3rem; border-radius: 16px; border: 1px solid var(--border-color); text-align: left; }
-    .contact-info p { font-size: 1.2rem; margin: 0 0 0.5rem 0; }
-    .contact-info a { color: var(--accent-primary); font-weight: 500; text-decoration: none; }
-    .qr-code { text-align: center; }
-    .qr-code img { max-width: 180px; height: auto; border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+  /* Projects (Carousel) */
+  .carousel {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    overflow: hidden; position: relative; padding-bottom: 2.6rem; /* space for dots */
+  }
+  .carousel-track-viewport { overflow: hidden; }
+  .carousel-track { display: flex; will-change: transform; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+  .carousel-slide { width: 100%; flex: 0 0 100%; padding: clamp(1.25rem, 2.5vw, 2.25rem); }
+  .project {
+    height: 360px; border-radius: var(--radius); border: 1px dashed var(--border);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 90%, transparent) 0%, transparent 100%);
+    display: grid; place-content: center; text-align: center; gap: .5rem; color: var(--muted);
+  }
+  .project h3 { margin: 0; color: var(--text); font-size: 1.3rem; }
 
-    /* --- FOOTER --- */
-    footer { text-align: center; padding: 4rem 1.5rem 2rem; border-top: 1px solid var(--border-color); background-color: var(--bg-card); }
-    .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
-    .footer-links a:hover { color: var(--accent-primary); }
-    .copyright { margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem; }
+  .car-btn {
+    position: absolute; top: 50%; translate: 0 -50%; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--bg-elev); box-shadow: var(--shadow-sm);
+    display: grid; place-items: center; cursor: pointer; transition: transform .2s ease, background .2s ease;
+  }
+  .car-btn:hover { transform: translateY(-2px); }
+  .car-btn.prev { left: 1rem; }
+  .car-btn.next { right: 1rem; }
 
-    /* --- RESPONSIVE MEDIA QUERIES --- */
-    @media (max-width: 768px) {
-        .nav-links { display: flex; flex-direction: column; justify-content: center; align-items: center; position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background-color: var(--bg-light); transition: right 0.3s ease-in-out; }
-        .nav-links.nav-open { right: 0; }
-        .nav-links a { font-size: 1.5rem; }
-        .hamburger-menu { display: flex; }
-        .contact-grid { grid-template-columns: 1fr; text-align: center; }
-        .hero-logo-container { width: 90%; margin-left: auto; margin-right: auto; }
-    }
+  .car-dots { position: absolute; left: 0; right: 0; bottom: .9rem; display: flex; gap: .5rem; justify-content: center; }
+  .car-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in oklab, var(--bg) 40%, transparent); cursor: pointer; }
+  .car-dot.current { background: color-mix(in oklab, var(--primary) 55%, transparent); border-color: transparent; width: 22px; }
+
+  /* Contact */
+  .contact {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; align-items: center; padding: clamp(1.25rem, 2.5vw, 2.5rem);
+    box-shadow: var(--shadow-md);
+  }
+  .contact p { margin: 0.25rem 0; font-size: 1.08rem; }
+  .contact a { color: var(--primary); font-weight: 700; text-decoration: none; }
+  .qr { text-align: center; }
+  .qr img { max-width: 180px; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+
+  /* Footer */
+  footer { background: var(--bg-elev); border-top: 1px solid var(--border); padding: 3rem 0 2rem; margin-top: 3rem; }
+  .footer-links { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+  .footer-links a { color: var(--muted); text-decoration: none; padding: .25rem .5rem; border-radius: 8px; }
+  .footer-links a:hover { color: var(--text); background: color-mix(in oklab, var(--primary) 10%, transparent); }
+  .copyright { margin-top: 1rem; color: var(--muted); font-size: .95rem; text-align: center; }
+
+  /* On-scroll reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger .cap-card { opacity: 0; transform: translateY(20px); }
+  .reveal-stagger.visible .cap-card { animation: cardIn .6s ease forwards; }
+  .reveal-stagger.visible .cap-card:nth-child(1) { animation-delay: .05s; }
+  .reveal-stagger.visible .cap-card:nth-child(2) { animation-delay: .12s; }
+  .reveal-stagger.visible .cap-card:nth-child(3) { animation-delay: .19s; }
+  .reveal-stagger.visible .cap-card:nth-child(4) { animation-delay: .26s; }
+  .reveal-stagger.visible .cap-card:nth-child(5) { animation-delay: .33s; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .contact { grid-template-columns: 1fr; text-align: center; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>
-  <nav class="container">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo"><img src="lotste.logo.png" alt="LOTSTE Logo"></a>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="careers.html">Careers</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <button class="hamburger-menu"><div class="bar"></div><div class="bar"></div><div class="bar"></div></button>
-    </div>
-</nav>
 
-<main>
-    <section id="home" class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-logo-container animate-on-scroll">
-            <img src="lotste.STE.logo.png" alt="LOTSTE Logo">
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-logo reveal">
+          <img src="lotste.STE.logo.png" alt="LOTSTE wordmark" />
         </div>
-        <div class="hero-buttons animate-on-scroll" style="margin-top: 1rem;">
-            <a href="#capabilities" class="button">End-to-End Capabilities</a>
-            <a href="#projects" class="button">Featured Projects</a>
-            <a href="#contact-us" class="button">Contact Us</a>
+        <div class="hero-actions reveal" style="margin-top: .5rem;">
+          <a class="btn" href="#capabilities">End‑to‑End Capabilities</a>
+          <a class="btn" href="#projects">Featured Projects</a>
+          <a class="btn" href="#contact">Contact Us</a>
         </div>
+      </div>
     </section>
 
-    <section id="capabilities" class="container">
-        <div class="animate-on-scroll">
-            <h2 class="section-title">Join us in empowering solutions for:</h2>
-            <div class="capabilities-grid">
-                <div class="capability-card"><h3>🚀 Rocketry</h3></div>
-                <div class="capability-card"><h3>✈️ Unmanned Aerial Vehicles</h3></div>
-                <div class="capability-card"><h3>🤖 Digital Engineering & AI</h3></div>
-                <div class="capability-card"><h3>💻 Software Development</h3></div>
-                <div class="capability-card"><h3>🦾 Robotics</h3></div>
-            </div>
+    <!-- CAPABILITIES -->
+    <section id="capabilities" class="section">
+      <div class="container reveal reveal-stagger">
+        <h2 class="section-title">Join us in empowering solutions for</h2>
+        <p class="section-subtitle">From flight hardware to intelligent software, we partner across the full lifecycle to design, build, and operate mission‑critical systems.</p>
+        <div class="cap-grid">
+          <article class="cap-card"><h3>🚀 Rocketry</h3></article>
+          <article class="cap-card"><h3>✈️ Unmanned Aerial Vehicles</h3></article>
+          <article class="cap-card"><h3>🤖 Digital Engineering &amp; AI</h3></article>
+          <article class="cap-card"><h3>💻 Software Development</h3></article>
+          <article class="cap-card"><h3>🦾 Robotics</h3></article>
         </div>
+      </div>
     </section>
 
-    <section id="projects" class="container animate-on-scroll">
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container reveal">
         <h2 class="section-title">Featured Projects</h2>
-        <div class="carousel">
-            <div class="carousel-track-container">
-                <div class="carousel-track">
-                    <div class="carousel-slide"><div class="project-placeholder"><h3>Sentinel UAV</h3><p>Environmental Monitoring Drone</p></div></div>
-                    <div class="carousel-slide"><div class="project-placeholder"><h3>Hyperion Engine</h3><p>Reusable Rocket Propulsion</p></div></div>
-                    <div class="carousel-slide"><div class="project-placeholder"><h3>Pioneer Rover</h3><p>Autonomous Exploration Platform</p></div></div>
+        <p class="section-subtitle">A snapshot of platforms and technologies we are advancing.</p>
+        <div class="carousel" role="region" aria-label="Featured projects carousel">
+          <div class="carousel-track-viewport">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>Sentinel UAV</h3>
+                  <p>Environmental Monitoring Drone</p>
                 </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>Hyperion Engine</h3>
+                  <p>Reusable Rocket Propulsion</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>Pioneer Rover</h3>
+                  <p>Autonomous Exploration Platform</p>
+                </div>
+              </div>
             </div>
-            <button class="carousel-button prev">&lt;</button>
-            <button class="carousel-button next">&gt;</button>
-            <div class="carousel-nav"></div>
+          </div>
+          <button class="car-btn prev" id="carPrev" aria-label="Previous slide">&#8249;</button>
+          <button class="car-btn next" id="carNext" aria-label="Next slide">&#8250;</button>
+          <div class="car-dots" id="carDots" aria-label="Slide indicators" role="tablist"></div>
         </div>
+      </div>
     </section>
 
-    <section id="contact-us" class="container animate-on-scroll">
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container reveal">
         <h2 class="section-title">Contact Us</h2>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <p>For inquiries, partnerships, and more:</p>
-                <p><strong><a href="mailto:info@lotste.com">info@lotste.com</a></strong></p>
-            </div>
-            <div class="qr-code">
-                <img src="qr.png" alt="Contact QR Code">
-            </div>
+        <div class="contact">
+          <div>
+            <p class="subtle">For inquiries, partnerships, and more:</p>
+            <p><strong><a href="mailto:info@lotste.com">info@lotste.com</a></strong></p>
+            <p class="subtle">İzmir, Türkiye</p>
+          </div>
+          <div class="qr">
+            <img src="qr.png" alt="Contact QR code" />
+          </div>
         </div>
+      </div>
     </section>
-</main>
+  </main>
 
-<footer>
+  <footer>
     <div class="container">
-        <div class="footer-links"><a href="about.html">About</a><a href="services.html">Services</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
-        <p class="copyright">&copy; 2025 LOTSTE. All Rights Reserved. | İzmir, Türkiye</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="copyright">&copy; 2025 LOTSTE. All rights reserved.</p>
     </div>
-</footer>
+  </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- Mobile Menu, Scroll Animations, Carousel Logic (same as before) ---
-        const hamburger = document.querySelector('.hamburger-menu');
-        const navLinks = document.querySelector('.nav-links');
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('nav-open');
-            });
+  /* --- i18n: auto‑switch EN/TR by locale with manual toggle --- */
+  (function () {
+    const STRINGS = {
+      en: {
+        metaTitle: 'LOTSTE – Science • Technology • Engineering',
+        metaDesc: 'LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics.',
+        nav: { home: 'Home', about: 'About Us', services: 'Services', careers: 'Careers', contact: 'Contact' },
+        heroCTAs: { capabilities: 'End‑to‑End Capabilities', projects: 'Featured Projects', contact: 'Contact Us' },
+        cap: {
+          title: 'Join us in empowering solutions for',
+          subtitle: 'From flight hardware to intelligent software, we partner across the full lifecycle to design, build, and operate mission‑critical systems.'
+        },
+        cards: ['🚀 Rocketry','✈️ Unmanned Aerial Vehicles','🤖 Digital Engineering & AI','💻 Software Development','🦾 Robotics'],
+        projects: {
+          title: 'Featured Projects',
+          subtitle: 'A snapshot of platforms and technologies we are advancing.',
+          slides: [
+            { title: 'Sentinel UAV', desc: 'Environmental Monitoring Drone' },
+            { title: 'Hyperion Engine', desc: 'Reusable Rocket Propulsion' },
+            { title: 'Pioneer Rover', desc: 'Autonomous Exploration Platform' }
+          ]
+        },
+        contact: { title: 'Contact Us', lead: 'For inquiries, partnerships, and more:', location: 'İzmir, Türkiye' },
+        footer: { about: 'About', services: 'Services', careers: 'Careers', contact: 'Contact', copyright: '© {year} LOTSTE. All rights reserved.' },
+        a11y: { carousel: 'Featured projects carousel', prev: 'Previous slide', next: 'Next slide', footerNav: 'Footer' }
+      },
+      tr: {
+        metaTitle: 'LOTSTE – Bilim • Teknoloji • Mühendislik',
+        metaDesc: 'LOTSTE; Roketçilik, İHA, Dijital Mühendislik ve Yapay Zekâ, Yazılım Geliştirme ve Robotik alanlarında çözümler geliştirir.',
+        nav: { home: 'Ana Sayfa', about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim' },
+        heroCTAs: { capabilities: 'Uçtan Uca Yetkinlikler', projects: 'Öne Çıkan Projeler', contact: 'Bize Ulaşın' },
+        cap: {
+          title: 'Birlikte güç kattığımız alanlar',
+          subtitle: 'Uçuş donanımından akıllı yazılıma kadar, görev‑kritik sistemleri tasarlamak, geliştirmek ve işletmek için yaşam döngüsünün her aşamasında iş ortağınızız.'
+        },
+        cards: ['🚀 Roketçilik','✈️ İnsansız Hava Araçları','🤖 Dijital Mühendislik & Yapay Zekâ','💻 Yazılım Geliştirme','🦾 Robotik'],
+        projects: {
+          title: 'Öne Çıkan Projeler',
+          subtitle: 'Geliştirdiğimiz platform ve teknolojilerden bir kesit.',
+          slides: [
+            { title: 'Sentinel İHA', desc: 'Çevresel İzleme İHA’sı' },
+            { title: 'Hyperion Motoru', desc: 'Yeniden Kullanılabilir Roket İtiş Sistemi' },
+            { title: 'Pioneer Rover', desc: 'Otonom Keşif Platformu' }
+          ]
+        },
+        contact: { title: 'İletişim', lead: 'Sorularınız, iş birlikleri ve daha fazlası için:', location: 'İzmir, Türkiye' },
+        footer: { about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim', copyright: '© {year} LOTSTE. Tüm hakları saklıdır.' },
+        a11y: { carousel: 'Öne çıkan projeler karuseli', prev: 'Önceki slayt', next: 'Sonraki slayt', footerNav: 'Alt menü' }
+      }
+    };
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    function applyI18n(lang) {
+      const s = STRINGS[lang] || STRINGS.en;
+      document.documentElement.lang = lang;
+      document.title = s.metaTitle;
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', s.metaDesc);
+
+      // Hero CTAs
+      document.querySelector('.hero-actions a[href="#capabilities"]')?.replaceChildren(s.heroCTAs.capabilities);
+      document.querySelector('.hero-actions a[href="#projects"]')?.replaceChildren(s.heroCTAs.projects);
+      document.querySelector('.hero-actions a[href="#contact"]')?.replaceChildren(s.heroCTAs.contact);
+
+      // Capabilities
+      $('#capabilities .section-title')?.replaceChildren(s.cap.title);
+      $('#capabilities .section-subtitle')?.replaceChildren(s.cap.subtitle);
+      $$('#capabilities .cap-card h3').forEach((el, i) => { if (s.cards[i]) el.innerHTML = s.cards[i]; });
+
+      // Projects
+      $('#projects .section-title')?.replaceChildren(s.projects.title);
+      $('#projects .section-subtitle')?.replaceChildren(s.projects.subtitle);
+      const titles = $$('#projects .project h3');
+      const descs = $$('#projects .project p');
+      s.projects.slides.forEach((sl, i) => { titles[i] && (titles[i].textContent = sl.title); descs[i] && (descs[i].textContent = sl.desc); });
+      document.querySelector('.carousel')?.setAttribute('aria-label', s.a11y.carousel);
+      document.getElementById('carPrev')?.setAttribute('aria-label', s.a11y.prev);
+      document.getElementById('carNext')?.setAttribute('aria-label', s.a11y.next);
+
+      // Contact
+      $('#contact .section-title')?.replaceChildren(s.contact.title);
+      const subtle = $$('#contact .contact .subtle');
+      subtle[0] && (subtle[0].textContent = s.contact.lead);
+      subtle[1] && (subtle[1].textContent = s.contact.location);
+
+      // Footer
+      const fl = $$('footer .footer-links a');
+      if (fl.length >= 4) {
+        fl[0].textContent = s.footer.about; fl[1].textContent = s.footer.services; fl[2].textContent = s.footer.careers; fl[3].textContent = s.footer.contact;
+      }
+      document.querySelector('footer .footer-links')?.setAttribute('aria-label', s.a11y.footerNav);
+      const year = String(new Date().getFullYear());
+      const copy = s.footer.copyright.replace('{year}', year);
+      $('footer .copyright')?.replaceChildren(copy);
+    }
+
+    // Detect preferred language & apply
+    let lang = localStorage.getItem('lang') || ((navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('tr') ? 'tr' : 'en');
+    applyI18n(lang);
+
+    // Toggle button
+    const switchBtn = document.getElementById('langSwitch');
+    if (switchBtn) {
+      const setBtn = () => { switchBtn.textContent = (lang === 'tr' ? 'EN' : 'TR'); switchBtn.setAttribute('aria-label', lang === 'tr' ? 'Dili değiştir' : 'Change language'); };
+      setBtn();
+      switchBtn.addEventListener('click', () => {
+        lang = lang === 'tr' ? 'en' : 'tr';
+        localStorage.setItem('lang', lang);
+        applyI18n(lang);
+        setBtn();
+      });
+    }
+  })();
+
+
+  // On-scroll reveal
+  (function() {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.12 });
 
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    scrollObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  })();
 
-        document.querySelectorAll('.animate-on-scroll').forEach((el) => scrollObserver.observe(el));
-        document.querySelectorAll('.capability-card').forEach((el) => scrollObserver.observe(el));
-
-
-        const track = document.querySelector('#projects .carousel-track');
-        if (track) {
-            const slides = Array.from(track.children);
-            const nextButton = document.querySelector('#projects .carousel-button.next');
-            const prevButton = document.querySelector('#projects .carousel-button.prev');
-            const dotsNav = document.querySelector('#projects .carousel-nav');
-            let autoPlayInterval;
-
-            const setupCarousel = () => {
-                if (slides.length === 0) return;
-                const slideWidth = slides()[0].getBoundingClientRect().width;
-                slides.forEach((slide, index) => {
-                    slide.style.left = slideWidth * index + 'px';
-                });
-
-                track.style.transform = 'translateX(0px)';
-
-                // Clear existing dots before creating new ones
-                while (dotsNav.firstChild) {
-                    dotsNav.removeChild(dotsNav.firstChild);
-                }
-
-                if (dotsNav.children.length === 0) {
-                     slides.forEach((_, index) => {
-                        const button = document.createElement('button');
-                        button.classList.add('carousel-indicator');
-                        if (index === 0) button.classList.add('current-slide');
-                        dotsNav.appendChild(button);
-                    });
-                }
-
-                slides.forEach(s => s.classList.remove('current-slide'));
-                slides()[0].classList.add('current-slide');
-
-                if(dotsNav.children.length > 0) {
-                    Array.from(dotsNav.children).forEach(d => d.classList.remove('current-slide'));
-                    dotsNav.children()[0].classList.add('current-slide');
-                }
-            };
-
-            setupCarousel();
-            window.addEventListener('resize', setupCarousel);
-
-            const moveToSlide = (currentSlide, targetSlide) => {
-                if (!targetSlide) return;
-                track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
-                currentSlide.classList.remove('current-slide');
-                targetSlide.classList.add('current-slide');
-            };
-
-            const updateDots = (currentDot, targetDot) => {
-                if (currentDot) currentDot.classList.remove('current-slide');
-                if (targetDot) targetDot.classList.add('current-slide');
-            };
-
-            const resetAutoPlay = () => {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = setInterval(() => {
-                    const currentSlide = track.querySelector('.current-slide') || slides()[0];
-                    const nextSlide = currentSlide.nextElementSibling || slides()[0];
-                    const currentDot = dotsNav.querySelector('.current-slide');
-                    const nextDot = currentDot ? (currentDot.nextElementSibling || dotsNav.firstElementChild) : null;
-                    moveToSlide(currentSlide, nextSlide);
-                    updateDots(currentDot, nextDot);
-                }, 5000);
-            };
-
-            const dots = Array.from(dotsNav.children);
-
-            prevButton.addEventListener('click', e => {
-                const currentSlide = track.querySelector('.current-slide');
-                const prevSlide = currentSlide.previousElementSibling || slides()[slides().length - 1];
-                const currentDot = dotsNav.querySelector('.current-slide');
-                const prevDot = currentDot.previousElementSibling || dotsNav.lastElementChild;
-                moveToSlide(currentSlide, prevSlide);
-                updateDots(currentDot, prevDot);
-                resetAutoPlay();
-            });
-
-            nextButton.addEventListener('click', e => {
-                const currentSlide = track.querySelector('.current-slide');
-                const nextSlide = currentSlide.nextElementSibling || slides()[0];
-                const currentDot = dotsNav.querySelector('.current-slide');
-                const nextDot = currentDot.nextElementSibling || dotsNav.firstElementChild;
-                moveToSlide(currentSlide, nextSlide);
-                updateDots(currentDot, nextDot);
-                resetAutoPlay();
-            });
-
-            dotsNav.addEventListener('click', e => {
-                const targetDot = e.target.closest('button.carousel-indicator');
-                if (!targetDot) return;
-                const currentSlide = track.querySelector('.current-slide');
-                const currentDot = dotsNav.querySelector('.current-slide');
-                const targetIndex = Array.from(dotsNav.children).findIndex(dot => dot === targetDot);
-                const targetSlide = slides()[targetIndex];
-                moveToSlide(currentSlide, targetSlide);
-                updateDots(currentDot, targetDot);
-                resetAutoPlay();
-            });
-
-            if(slides().length > 1) resetAutoPlay();
-        }
+  // Enhance capabilities cards visuals (emoji badge + strong title)
+  (function(){
+    document.querySelectorAll('#capabilities .cap-card h3').forEach(h => {
+      const text = h.textContent.trim();
+      const parts = text.split(' ');
+      const emoji = parts.shift() || '';
+      const label = parts.join(' ').trim();
+      h.innerHTML = `<span class="icon-badge">${emoji}</span><span class="cap-title">${label}</span>`;
     });
+  })();
+
+  // Carousel (accessible, bug‑free)
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const prev = document.getElementById('carPrev');
+    const next = document.getElementById('carNext');
+    const dotsNav = document.getElementById('carDots');
+    if (!track || !prev || !next || !dotsNav) return;
+
+    let slides = Array.from(track.children);
+    let index = 0;
+    let autoplay; // id
+
+    const setSlidePositions = () => {
+      slides = Array.from(track.children); // refresh if responsive changes
+      const width = track.parentElement.getBoundingClientRect().width;
+      slides.forEach((slide, i) => {
+        slide.style.minWidth = width + 'px';
+      });
+      moveTo(index, false);
+    };
+
+    const buildDots = () => {
+      dotsNav.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'car-dot' + (i === index ? ' current' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        dot.addEventListener('click', () => { goTo(i); });
+        dotsNav.appendChild(dot);
+      });
+    };
+
+    const moveTo = (i, animate = true) => {
+      index = (i + slides.length) % slides.length;
+      track.style.transition = animate ? 'transform .55s cubic-bezier(.2,.7,.2,1)' : 'none';
+      const offset = slides[index].offsetLeft;
+      track.style.transform = `translateX(-${offset}px)`;
+      updateDots();
+    };
+
+    const updateDots = () => {
+      Array.from(dotsNav.children).forEach((el, i) => {
+        el.classList.toggle('current', i === index);
+        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    };
+
+    const goTo = (i) => { moveTo(i); resetAutoplay(); };
+
+    const nextSlide = () => goTo(index + 1);
+    const prevSlide = () => goTo(index - 1);
+
+    prev.addEventListener('click', prevSlide);
+    next.addEventListener('click', nextSlide);
+
+    const resetAutoplay = () => {
+      clearInterval(autoplay);
+      if (slides.length > 1) {
+        autoplay = setInterval(nextSlide, 5000);
+      }
+    };
+
+    // Keyboard support
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Pause on hover
+    track.addEventListener('mouseenter', () => clearInterval(autoplay));
+    track.addEventListener('mouseleave', resetAutoplay);
+
+    // Init
+    setSlidePositions();
+    buildDots();
+    resetAutoplay();
+
+    window.addEventListener('resize', () => {
+      setSlidePositions();
+    });
+  })();
 </script>
 </body>
 </html>
