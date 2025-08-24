@@ -2,48 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Site Under Maintenance – LOTSTE</title>
-<meta name="description" content="Our website is currently undergoing scheduled maintenance." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LOTSTE – Science • Technology • Engineering</title>
+<meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI in Aerospace, Software Development, and Robotics." />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
 
 <style>
   :root {
-    /* Palette (copied from original site for consistency) */
+    /* Palette */
     --bg: #f7f9fc;
     --bg-elev: #ffffff;
-    --text: #0f172a;      /* slate-900 */
-    --muted: #5b6577;     /* slate-500/600 */
-    --border: #e5e7eb;    /* gray-200 */
-    --primary: #0ea5e9;   /* sky-500 */
-    --primary-2: #6366f1; /* indigo-500 */
+    --text: #0f172a;          /* slate-900 */
+    --muted: #5b6577;         /* slate-500/600 */
+    --border: #e5e7eb;        /* gray-200 */
+    --primary: #0ea5e9;       /* sky-500 */
+    --primary-2: #6366f1;     /* indigo-500 */
+    --success: #10b981;
 
     /* Effects */
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
     --shadow-md: 0 6px 24px rgba(2, 6, 23, 0.08);
+    --shadow-lg: 0 20px 50px rgba(2, 6, 23, 0.10);
 
     /* Radii & spacing */
+    --radius: 14px;
     --radius-lg: 18px;
+    --radius-pill: 999px;
+    --content-max: 1200px;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0b1220;      /* deep navy */
-      --bg-elev: #0f172a;  /* slate-900 */
-      --text: #e5e7eb;    /* gray-200 */
-      --muted: #94a3b8;    /* slate-400 */
-      --border: #1f2937;  /* gray-800 */
+      --bg: #0b1220;          /* deep navy */
+      --bg-elev: #0f172a;      /* slate-900 */
+      --text: #e5e7eb;        /* gray-200 */
+      --muted: #94a3b8;        /* slate-400 */
+      --border: #1f2937;      /* gray-800 */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
       --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
   }
 
   /* Base */
-  html {
-    height: 100%;
-  }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -52,118 +58,504 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  .container { max-width: var(--content-max); margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Utilities */
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; }
+  .section { padding: clamp(3.5rem, 6vw, 6rem) 0; }
+  .subtle { color: var(--muted); }
+
+  /* Hero */
+  .hero { position: relative; min-height: 95vh; display: grid; place-items: center; text-align: center; }
+  .hero-bg {
+    position: absolute; inset: -20vh -10vw -10vh -10vw; z-index: -1; filter: blur(60px) saturate(1.2);
+    background:
+      radial-gradient(35% 40% at 22% 28%, color-mix(in oklab, var(--primary) 55%, transparent) 0%, transparent 60%),
+      radial-gradient(40% 45% at 78% 22%, color-mix(in oklab, var(--primary-2) 45%, transparent) 0%, transparent 65%),
+      radial-gradient(50% 50% at 50% 90%, color-mix(in oklab, #22d3ee 35%, transparent) 0%, transparent 60%);
+    opacity: .9;
+  }
+  .hero-inner { padding-top: 2.2rem; }
+  .hero-logo { width: min(860px, 82vw); margin-inline: auto; animation: fadeUp .9s ease both; }
+  .hero-logo img { width: 100%; height: auto; display: block; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1.5rem; animation: fadeUp .9s ease .15s both; }
+
+  /* Buttons */
+  .btn {
+    --btn-bg: linear-gradient(90deg, var(--primary), var(--primary-2));
+    display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    padding: 0.9rem 1.25rem; border-radius: var(--radius-pill); color: white; font-weight: 700;
+    box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 28%, transparent);
+    border: none; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; background: var(--btn-bg);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px color-mix(in oklab, var(--primary) 32%, transparent); }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+  .btn.ghost:hover { background: color-mix(in oklab, var(--primary) 10%, transparent); }
+  /* Button size/shape variants */
+  .btn.btn--sm { padding: .55rem .85rem; font-size: .9rem; }
+  .btn.round { border-radius: 50%; width: 44px; height: 44px; padding: 0; display: grid; place-items: center; }
+
+  /* Section headings */
+  .section-title {
+    font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.6rem); letter-spacing: 0.2px; margin: 0 0 .4rem;
+    background: linear-gradient(90deg, var(--text), color-mix(in oklab, var(--text) 80%, var(--primary)));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .section-subtitle { max-width: 760px; margin: 0.25rem auto 2.4rem; color: var(--muted); font-size: 1.075rem; }
+
+  /* Capabilities */
+  .capabilities-star-layout {
     display: grid;
-    place-items: center;
-    min-height: 100%;
-    text-align: center;
-    padding: 1.5rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
   }
+  .cap-card {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.6rem; text-align: left; box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .cap-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--primary) 35%, var(--border)); }
+  .cap-card h3 { margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: .55rem; }
+  
+  /* Star layout positioning */
+  .cap-card:nth-child(1) { grid-area: 1 / 3 / 2 / 5; } /* Top center */
+  .cap-card:nth-child(2) { grid-area: 2 / 1 / 3 / 3; } /* Middle left */
+  .cap-card:nth-child(3) { grid-area: 2 / 5 / 3 / 7; } /* Middle right */
+  .cap-card:nth-child(4) { grid-area: 3 / 2 / 4 / 4; } /* Bottom left */
+  .cap-card:nth-child(5) { grid-area: 3 / 4 / 4 / 6; } /* Bottom right */
 
-  /* Maintenance Box */
-  .maintenance-box {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: clamp(2rem, 6vw, 3.5rem);
-    max-width: 650px;
+  #capabilities { position: relative; }
+  #capabilities::before { content: ""; position: absolute; left: -10%; right: -10%; top: 0; height: 220px; background:
+    radial-gradient(40% 60% at 20% 20%, color-mix(in oklab, var(--primary) 20%, transparent) 0%, transparent 70%),
+    radial-gradient(30% 50% at 80% 10%, color-mix(in oklab, var(--primary-2) 18%, transparent) 0%, transparent 70%);
+    filter: blur(30px); opacity: .65; z-index: -1; }
+
+  .cap-card { position: relative; overflow: hidden; }
+  .cap-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--card-accent, var(--primary)), transparent); }
+  .cap-card .icon-badge { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; background: color-mix(in oklab, var(--card-accent, var(--primary)) 16%, transparent); border: 1px solid color-mix(in oklab, var(--card-accent, var(--primary)) 50%, var(--border)); box-shadow: var(--shadow-sm); }
+  .cap-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--card-accent) 35%, var(--border)); }
+  .cap-title { font-weight: 800; letter-spacing: .2px; }
+
+  .cap-card:nth-child(1) { --card-accent: #0ea5e9; }
+  .cap-card:nth-child(2) { --card-accent: #22c55e; }
+  .cap-card:nth-child(3) { --card-accent: #6366f1; }
+  .cap-card:nth-child(4) { --card-accent: #f59e0b; }
+  .cap-card:nth-child(5) { --card-accent: #ef4444; }
+
+  /* Projects (Carousel) */
+  .carousel {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    overflow: hidden; position: relative; padding-bottom: 2.6rem; /* space for dots */
+  }
+  .carousel-track-viewport { overflow: hidden; }
+  .carousel-track { display: flex; will-change: transform; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+  .carousel-slide {
     width: 100%;
-    position: relative;
-    overflow: hidden;
+    flex: 0 0 100%;
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    box-sizing: border-box; /* Ensures padding is included in the 100% width */
   }
-
-  /* Decorative Gradient Bar */
-  .maintenance-box::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  .project {
+    height: 360px; border-radius: var(--radius); border: 1px dashed var(--border);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 90%, transparent) 0%, transparent 100%);
+    display: grid; place-content: center; text-align: center; gap: .5rem; color: var(--muted);
+    padding: 1rem;
   }
+  .project h3 { margin: 0; color: var(--text); font-size: 1.3rem; }
+  .project p { font-size: 1rem; max-width: 60ch; margin-inline: auto; }
 
-  /* Content Styling */
-  h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin: 0.5rem 0 1rem;
-    color: var(--text);
+
+  .car-btn {
+    position: absolute; top: 50%; translate: 0 -50%; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--bg-elev); box-shadow: var(--shadow-sm);
+    display: grid; place-items: center; cursor: pointer; transition: transform .2s ease, background .2s ease;
   }
+  .car-btn:hover { transform: translateY(-2px); }
+  .car-btn.prev { left: 1rem; }
+  .car-btn.next { right: 1rem; }
 
-  p {
-    color: var(--muted);
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  .car-dots { position: absolute; left: 0; right: 0; bottom: .9rem; display: flex; gap: .5rem; justify-content: center; }
+  .car-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in oklab, var(--bg) 40%, transparent); cursor: pointer; }
+  .car-dot.current { background: color-mix(in oklab, var(--primary) 55%, transparent); border-color: transparent; width: 22px; }
+
+  /* Contact */
+  .contact {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; align-items: center; padding: clamp(1.25rem, 2.5vw, 2.5rem);
+    box-shadow: var(--shadow-md);
   }
+  .contact p { margin: 0.25rem 0; font-size: 1.08rem; }
+  .contact a { color: var(--primary); font-weight: 700; text-decoration: none; }
+  .qr { text-align: center; }
+  .qr img { max-width: 180px; width: 100%; height: auto; border-radius: 0; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 
-  .maintenance-period {
-    background: color-mix(in oklab, var(--primary) 10%, transparent);
-    border: 1px solid color-mix(in oklab, var(--primary) 25%, var(--border));
-    border-radius: 12px;
-    padding: 0.8rem 1.2rem;
-    margin: 1.8rem auto;
-    display: inline-block;
-  }
+  /* Footer */
+  footer { background: var(--bg-elev); border-top: 1px solid var(--border); padding: 3rem 0 2rem; margin-top: 3rem; }
+  .footer-links { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+  .footer-links a { color: var(--muted); text-decoration: none; padding: .25rem .5rem; border-radius: 8px; }
+  .footer-links a:hover { color: var(--text); background: color-mix(in oklab, var(--primary) 10%, transparent); }
+  .copyright { margin-top: 1rem; color: var(--muted); font-size: .95rem; text-align: center; }
 
-  .maintenance-period p {
-    margin: 0;
-    font-weight: 500;
-    color: var(--text);
-  }
+  /* On-scroll reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger .cap-card { opacity: 0; transform: translateY(20px); }
+  .reveal-stagger.visible .cap-card { animation: cardIn .6s ease forwards; }
+  .reveal-stagger.visible .cap-card:nth-child(1) { animation-delay: .05s; }
+  .reveal-stagger.visible .cap-card:nth-child(2) { animation-delay: .12s; }
+  .reveal-stagger.visible .cap-card:nth-child(3) { animation-delay: .19s; }
+  .reveal-stagger.visible .cap-card:nth-child(4) { animation-delay: .26s; }
+  .reveal-stagger.visible .cap-card:nth-child(5) { animation-delay: .33s; }
 
-  .maintenance-period strong {
-    font-weight: 700;
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .contact { grid-template-columns: 1fr; text-align: center; }
   }
   
-  .logo {
-    max-width: 200px;
-    margin-bottom: 1rem;
-    opacity: 0.8;
+  @media (max-width: 768px) {
+    .capabilities-star-layout {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
-  .contact-info {
-      margin-top: 2rem;
-      font-size: 0.95rem;
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
   }
-
-  .contact-info a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-  }
-  .contact-info a:hover {
-      text-decoration: underline;
-  }
-
 </style>
 </head>
 <body>
 
-  <main class="maintenance-box">
-    <img src="lotste.logo.png" alt="LOTSTE Logo" class="logo" />
-    <h1>Under Maintenance</h1>
-    <p>We're currently performing scheduled maintenance to improve our services. We apologize for any inconvenience.</p>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-logo reveal">
+          <img src="lotste.STE.logo.png" alt="LOTSTE wordmark" />
+        </div>
+        <div class="hero-actions reveal" style="margin-top: .5rem;">
+          <a class="btn" href="#capabilities">End‑to‑End Capabilities</a>
+          <a class="btn" href="#projects">Featured Projects</a>
+          <a class="btn" href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="maintenance-period">
-      <p>The site will be unavailable from:</p>
-      <strong>August 20, 2025 – August 22, 2025</strong>
-    </div>
+    <!-- CAPABILITIES -->
+    <section id="capabilities" class="section">
+      <div class="container reveal reveal-stagger">
+        <h2 class="section-title">End‑to‑End Capabilities</h2>
+        <p class="section-subtitle">Join us in empowering solutions for</p>
+        <div class="capabilities-star-layout">
+          <article class="cap-card"><h3>🚀 Rocketry</h3></article>
+          <article class="cap-card"><h3>✈️ Unmanned Aerial Vehicles</h3></article>
+          <article class="cap-card"><h3>🤖 Digital Engineering &amp; AI</h3></article>
+          <article class="cap-card"><h3>💻 Software Development</h3></article>
+          <article class="cap-card"><h3>🦾 Robotics</h3></article>
+        </div>
+      </div>
+    </section>
 
-    <p>We expect to be back online shortly after this period. Thank you for your patience.</p>
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container reveal">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">A snapshot of platforms and technologies we are advancing.</p>
+        <div class="carousel" role="region" aria-label="Featured projects carousel">
+          <div class="carousel-track-viewport">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>Model-Based UAV System with an authoritative digital surrogate</h3>
+                  <p>The traditional lifecycle of unmanned systems is being fundamentally redefined. Through the application of Model-Based Systems Engineering (MBSE), our platforms are virtually perfected prior to manufacturing, eliminating design risks. Once deployed, each asset operates in tandem with an authoritative digital surrogate, creating a closed-loop system that enables predictive maintenance, continuous learning, and a new standard of operational intelligence.</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>Airborne Communications Relay</h3>
+                  <p>Our Airborne Communications Relay is engineered to provide temporary infrastructure by packaging a complete network node into a rapidly deployable UAV. This system is designed to provide on-demand 4G/5G and Wi-Fi coverage, establishing a high-bandwidth 'network in the sky' in under 30 minutes. It serves as an agile solution for everything from public event overload to critical operations in infrastructure-denied zones.</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="project">
+                  <h3>GNSS/INS-denied rocket navigation</h3>
+                  <p>Project Ghost addresses the most catastrophic guidance failure scenario: the simultaneous loss of both GNSS and INS data. In this event, our system is engineered to resurrect its sense of direction by reconstructing a missile's complete state vector using only non-inertial, environmental-sensing techniques. It achieves this by treating the surrounding environment as a complex map of visual, magnetic, and radio landmarks, allowing it to re-establish its position and heading from absolute scratch. This fundamental shift from internal dead-reckoning to external environmental awareness creates a profoundly resilient system capable of surviving and completing its mission even after a total loss of its primary senses.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="car-btn prev" id="carPrev" aria-label="Previous slide">&#8249;</button>
+          <button class="car-btn next" id="carNext" aria-label="Next slide">&#8250;</button>
+          <div class="car-dots" id="carDots" aria-label="Slide indicators" role="tablist"></div>
+        </div>
+      </div>
+    </section>
 
-    <div class="contact-info">
-        <p>For urgent inquiries, please contact us at <a href="mailto:contact@lotste.com">contact@lotste.com</a>.</p>
-    </div>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container reveal">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact">
+          <div>
+            <p class="subtle">For inquiries, partnerships, and more:</p>
+            <p><strong><a href="mailto:contact@lotste.com">contact@lotste.com</a></strong></p>
+            <p class="subtle">Ankara, Türkiye</p>
+          </div>
+          <div class="qr">
+            <img src="qr.png" alt="Contact QR code" />
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    <div class="container">
+      <nav class="footer-links" aria-label="Footer">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="copyright">&copy; 2025 LOTSTE. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script>
+  /* --- i18n: auto‑switch EN/TR by locale with manual toggle --- */
+  (function () {
+    const STRINGS = {
+      en: {
+        metaTitle: 'LOTSTE – Science • Technology • Engineering',
+        metaDesc: 'LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics.',
+        nav: { home: 'Home', about: 'About Us', services: 'Services', careers: 'Careers', contact: 'Contact' },
+        heroCTAs: { capabilities: 'End‑to‑End Capabilities', projects: 'Featured Projects', contact: 'Contact Us' },
+        cap: {
+          title: 'End‑to‑End Capabilities',
+          subtitle: 'Join us in empowering solutions for'
+        },
+        cards: ['🚀 Rocketry','✈️ Unmanned Aerial Vehicles','🤖 Digital Engineering & AI','💻 Software Development','🦾 Robotics'],
+        projects: {
+          title: 'Featured Projects',
+          subtitle: 'A snapshot of platforms and technologies we are advancing.',
+          slides: [
+            { title: 'Model-Based UAV System with an authoritative digital surrogate', desc: 'The traditional lifecycle of unmanned systems is being fundamentally redefined. Through the application of Model-Based Systems Engineering (MBSE), our platforms are virtually perfected prior to manufacturing, eliminating design risks. Once deployed, each asset operates in tandem with an authoritative digital surrogate, creating a closed-loop system that enables predictive maintenance, continuous learning, and a new standard of operational intelligence.' },
+            { title: 'Airborne Communications Relay', desc: "Our Airborne Communications Relay is engineered to provide temporary infrastructure by packaging a complete network node into a rapidly deployable UAV. This system is designed to provide on-demand 4G/5G and Wi-Fi coverage, establishing a high-bandwidth 'network in the sky' in under 30 minutes. It serves as an agile solution for everything from public event overload to critical operations in infrastructure-denied zones." },
+            { title: 'GNSS/INS-denied rocket navigation', desc: "Project Ghost addresses the most catastrophic guidance failure scenario: the simultaneous loss of both GNSS and INS data. In this event, our system is engineered to resurrect its sense of direction by reconstructing a missile's complete state vector using only non-inertial, environmental-sensing techniques. It achieves this by treating the surrounding environment as a complex map of visual, magnetic, and radio landmarks, allowing it to re-establish its position and heading from absolute scratch. This fundamental shift from internal dead-reckoning to external environmental awareness creates a profoundly resilient system capable of surviving and completing its mission even after a total loss of its primary senses." }
+          ]
+        },
+        contact: { title: 'Contact Us', lead: 'For inquiries, partnerships, and more:', location: 'Ankara, Türkiye' },
+        footer: { about: 'About', services: 'Services', careers: 'Careers', contact: 'Contact', copyright: '© {year} LOTSTE. All rights reserved.' },
+        a11y: { carousel: 'Featured projects carousel', prev: 'Previous slide', next: 'Next slide', footerNav: 'Footer' }
+      },
+      tr: {
+        metaTitle: 'LOTSTE – Bilim • Teknoloji • Mühendislik',
+        metaDesc: 'LOTSTE; Roketçilik, İHA, Dijital Mühendislik ve Yapay Zekâ, Yazılım Geliştirme ve Robotik alanlarında çözümler geliştirir.',
+        nav: { home: 'Ana Sayfa', about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim' },
+        heroCTAs: { capabilities: 'Uçtan Uca Yetkinlikler', projects: 'Öne Çıkan Projeler', contact: 'Bize Ulaşın' },
+        cap: {
+          title: 'Uçtan Uca Yetkinlikler',
+          subtitle: 'Birlikte güç kattığımız alanlar'
+        },
+        cards: ['🚀 Roketçilik','✈️ İnsansız Hava Araçları','🤖 Dijital Mühendislik & Yapay Zekâ','💻 Yazılım Geliştirme','🦾 Robotik'],
+        projects: {
+          title: 'Öne Çıkan Projeler',
+          subtitle: 'Geliştirdiğimiz platform ve teknolojilerden bir kesit.',
+          slides: [
+            { title: 'Yetkin bir dijital ikiz ile Model Tabanlı İHA Sistemi', desc: 'İnsansız sistemlerin geleneksel yaşam döngüsü temelden yeniden tanımlanıyor. Model Tabanlı Sistemler Mühendisliği (MBSE) uygulamasıyla platformlarımız, tasarım risklerini ortadan kaldırarak üretimden önce sanal olarak mükemmelleştirilir. Her bir varlık, konuşlandırıldıktan sonra, kestirimci bakım, sürekli öğrenme ve yeni bir operasyonel zeka standardı sağlayan kapalı döngü bir sistem oluşturarak yetkin bir dijital ikiz ile birlikte çalışır.' },
+            { title: 'Hava Konuşlu Haberleşme Rölesi', desc: "Hava Konuşlu Haberleşme Rölemiz, hızla konuşlandırılabilen bir İHA'ya tam bir ağ düğümü paketleyerek geçici altyapı sağlamak üzere tasarlanmıştır. Bu sistem, 30 dakikadan daha kısa sürede yüksek bant genişliğine sahip bir 'gökyüzü ağı' kurarak isteğe bağlı 4G/5G ve Wi-Fi kapsama alanı sağlamak için tasarlanmıştır. Halka açık etkinliklerdeki aşırı yüklenmeden altyapıdan yoksun bölgelerdeki kritik operasyonlara kadar her şey için çevik bir çözüm olarak hizmet vermektedir." },
+            { title: 'GNSS/INS-desteksiz roket navigasyonu', desc: "Ghost Projesi, en yıkıcı güdüm arızası senaryosunu ele alır: hem GNSS hem de INS verilerinin aynı anda kaybedilmesi. Bu durumda sistemimiz, bir füzenin tam durum vektörünü yalnızca eylemsiz olmayan, çevresel algılama teknikleri kullanarak yeniden oluşturarak yön duygusunu yeniden canlandırmak üzere tasarlanmıştır. Bunu, çevresindeki ortamı görsel, manyetik ve radyo işaretlerinden oluşan karmaşık bir harita olarak ele alarak başarır ve konumunu ve yönünü mutlak sıfırdan yeniden belirlemesine olanak tanır. Dahili ataletsel navigasyondan harici çevresel farkındalığa doğru bu temel geçiş, birincil duyularının tamamen kaybedilmesinden sonra bile hayatta kalabilen ve görevini tamamlayabilen son derece dayanıklı bir sistem oluşturur." }
+          ]
+        },
+        contact: { title: 'İletişim', lead: 'Sorularınız, iş birlikleri ve daha fazlası için:', location: 'Ankara, Türkiye' },
+        footer: { about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim', copyright: '© {year} LOTSTE. Tüm hakları saklıdır.' },
+        a11y: { carousel: 'Öne çıkan projeler karuseli', prev: 'Önceki slayt', next: 'Sonraki slayt', footerNav: 'Alt menü' }
+      }
+    };
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    function applyI18n(lang) {
+      const s = STRINGS[lang] || STRINGS.en;
+      document.documentElement.lang = lang;
+      document.title = s.metaTitle;
+      const md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', s.metaDesc);
+
+      // Hero CTAs
+      document.querySelector('.hero-actions a[href="#capabilities"]')?.replaceChildren(s.heroCTAs.capabilities);
+      document.querySelector('.hero-actions a[href="#projects"]')?.replaceChildren(s.heroCTAs.projects);
+      document.querySelector('.hero-actions a[href="#contact"]')?.replaceChildren(s.heroCTAs.contact);
+
+      // Capabilities
+      $('#capabilities .section-title')?.replaceChildren(s.cap.title);
+      $('#capabilities .section-subtitle')?.replaceChildren(s.cap.subtitle);
+      $$('#capabilities .cap-card h3').forEach((el, i) => { if (s.cards[i]) el.innerHTML = s.cards[i]; });
+
+      // Projects
+      $('#projects .section-title')?.replaceChildren(s.projects.title);
+      $('#projects .section-subtitle')?.replaceChildren(s.projects.subtitle);
+      const titles = $$('#projects .project h3');
+      const descs = $$('#projects .project p');
+      s.projects.slides.forEach((sl, i) => { titles[i] && (titles[i].textContent = sl.title); descs[i] && (descs[i].textContent = sl.desc); });
+      document.querySelector('.carousel')?.setAttribute('aria-label', s.a11y.carousel);
+      document.getElementById('carPrev')?.setAttribute('aria-label', s.a11y.prev);
+      document.getElementById('carNext')?.setAttribute('aria-label', s.a11y.next);
+
+      // Contact
+      $('#contact .section-title')?.replaceChildren(s.contact.title);
+      const subtle = $$('#contact .contact .subtle');
+      subtle[0] && (subtle[0].textContent = s.contact.lead);
+      subtle[1] && (subtle[1].textContent = s.contact.location);
+
+      // Footer
+      const fl = $$('footer .footer-links a');
+      if (fl.length >= 4) {
+        fl[0].textContent = s.footer.about; fl[1].textContent = s.footer.services; fl[2].textContent = s.footer.careers; fl[3].textContent = s.footer.contact;
+      }
+      document.querySelector('footer .footer-links')?.setAttribute('aria-label', s.a11y.footerNav);
+      const year = String(new Date().getFullYear());
+      const copy = s.footer.copyright.replace('{year}', year);
+      $('footer .copyright')?.replaceChildren(copy);
+    }
+
+    // Detect preferred language & apply
+    let lang = localStorage.getItem('lang') || ((navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('tr') ? 'tr' : 'en');
+    applyI18n(lang);
+
+    // Toggle button
+    const switchBtn = document.getElementById('langSwitch');
+    if (switchBtn) {
+      const setBtn = () => { switchBtn.textContent = (lang === 'tr' ? 'EN' : 'TR'); switchBtn.setAttribute('aria-label', lang === 'tr' ? 'Dili değiştir' : 'Change language'); };
+      setBtn();
+      switchBtn.addEventListener('click', () => {
+        lang = lang === 'tr' ? 'en' : 'tr';
+        localStorage.setItem('lang', lang);
+        applyI18n(lang);
+        setBtn();
+      });
+    }
+  })();
+
+
+  // On-scroll reveal
+  (function() {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  })();
+
+  // Enhance capabilities cards visuals (emoji badge + strong title)
+  (function(){
+    document.querySelectorAll('#capabilities .cap-card h3').forEach(h => {
+      const text = h.textContent.trim();
+      const parts = text.split(' ');
+      const emoji = parts.shift() || '';
+      const label = parts.join(' ').trim();
+      h.innerHTML = `<span class="icon-badge">${emoji}</span><span class="cap-title">${label}</span>`;
+    });
+  })();
+
+  // Carousel (accessible, bug‑free)
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const prev = document.getElementById('carPrev');
+    const next = document.getElementById('carNext');
+    const dotsNav = document.getElementById('carDots');
+    if (!track || !prev || !next || !dotsNav) return;
+
+    let slides = Array.from(track.children);
+    let index = 0;
+    let autoplay; // id
+
+    const setSlidePositions = () => {
+      slides = Array.from(track.children); // refresh if responsive changes
+      const width = track.parentElement.getBoundingClientRect().width;
+      slides.forEach((slide, i) => {
+        slide.style.minWidth = width + 'px';
+      });
+      moveTo(index, false);
+    };
+
+    const buildDots = () => {
+      dotsNav.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'car-dot' + (i === index ? ' current' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        dot.addEventListener('click', () => { goTo(i); });
+        dotsNav.appendChild(dot);
+      });
+    };
+
+    const moveTo = (i, animate = true) => {
+      index = (i + slides.length) % slides.length;
+      track.style.transition = animate ? 'transform .55s cubic-bezier(.2,.7,.2,1)' : 'none';
+      const offset = slides[index].offsetLeft;
+      track.style.transform = `translateX(-${offset}px)`;
+      updateDots();
+    };
+
+    const updateDots = () => {
+      Array.from(dotsNav.children).forEach((el, i) => {
+        el.classList.toggle('current', i === index);
+        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    };
+
+    const goTo = (i) => { moveTo(i); resetAutoplay(); };
+
+    const nextSlide = () => goTo(index + 1);
+    const prevSlide = () => goTo(index - 1);
+
+    prev.addEventListener('click', prevSlide);
+    next.addEventListener('click', nextSlide);
+
+    const resetAutoplay = () => {
+      clearInterval(autoplay);
+      if (slides.length > 1) {
+        autoplay = setInterval(nextSlide, 5000);
+      }
+    };
+
+    // Keyboard support
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Pause on hover
+    track.addEventListener('mouseenter', () => clearInterval(autoplay));
+    track.addEventListener('mouseleave', resetAutoplay);
+
+    // Init
+    setSlidePositions();
+    buildDots();
+    resetAutoplay();
+
+    window.addEventListener('resize', () => {
+      setSlidePositions();
+    });
+  })();
+</script>
 </body>
 </html>
-
-
-
