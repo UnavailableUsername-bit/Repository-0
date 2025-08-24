@@ -6,9 +6,8 @@
 <title>LOTSTE – Science • Technology • Engineering</title>
 <meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics." />
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
 
 <style>
@@ -76,10 +75,18 @@
       radial-gradient(40% 45% at 78% 22%, color-mix(in oklab, var(--primary-2) 45%, transparent) 0%, transparent 65%),
       radial-gradient(50% 50% at 50% 90%, color-mix(in oklab, #22d3ee 35%, transparent) 0%, transparent 60%);
     opacity: .9;
+    animation: rotateBg 30s linear infinite;
   }
+  @keyframes rotateBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  
   .hero-inner { padding-top: 2.2rem; }
   .hero-logo { width: min(860px, 82vw); margin-inline: auto; animation: fadeUp .9s ease both; }
-  .hero-logo img { width: 100%; height: auto; display: block; }
+  .hero-logo img { width: 100%; height: auto; display: block; animation: logoGlow 5s ease-in-out infinite; }
+  @keyframes logoGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px transparent); }
+    50% { filter: drop-shadow(0 0 25px color-mix(in oklab, var(--primary) 20%, transparent)); }
+  }
+  
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1.5rem; animation: fadeUp .9s ease .15s both; }
 
   /* Buttons */
@@ -88,9 +95,9 @@
     display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
     padding: 0.9rem 1.25rem; border-radius: var(--radius-pill); color: white; font-weight: 700;
     box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 28%, transparent);
-    border: none; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; background: var(--btn-bg);
+    border: none; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease; background: var(--btn-bg);
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px color-mix(in oklab, var(--primary) 32%, transparent); }
+  .btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 38px color-mix(in oklab, var(--primary) 35%, transparent); }
   .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
   .btn.ghost:hover { background: color-mix(in oklab, var(--primary) 10%, transparent); }
   /* Button size/shape variants */
@@ -119,7 +126,7 @@
     padding: 1.6rem; text-align: left; box-shadow: var(--shadow-sm);
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
-  .cap-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--primary) 35%, var(--border)); }
+  .cap-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--card-accent) 40%, var(--border)); }
   .cap-card h3 { margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: .55rem; }
   
   /* Star layout positioning */
@@ -136,9 +143,9 @@
     filter: blur(30px); opacity: .65; z-index: -1; }
 
   .cap-card { position: relative; overflow: hidden; }
-  .cap-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--card-accent, var(--primary)), transparent); }
+  .cap-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--card-accent, var(--primary)), transparent); opacity: 0; transition: opacity 0.3s ease; }
+  .cap-card:hover::before { opacity: 1; }
   .cap-card .icon-badge { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 1.2rem; background: color-mix(in oklab, var(--card-accent, var(--primary)) 16%, transparent); border: 1px solid color-mix(in oklab, var(--card-accent, var(--primary)) 50%, var(--border)); box-shadow: var(--shadow-sm); }
-  .cap-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--card-accent) 35%, var(--border)); }
   .cap-title { font-weight: 800; letter-spacing: .2px; }
 
   .cap-card:nth-child(1) { --card-accent: #0ea5e9; }
@@ -182,12 +189,12 @@
     border: 1px solid var(--border); background: var(--bg-elev); box-shadow: var(--shadow-sm);
     display: grid; place-items: center; cursor: pointer; transition: transform .2s ease, background .2s ease;
   }
-  .car-btn:hover { transform: translateY(-2px); }
+  .car-btn:hover { transform: translateY(-2px) scale(1.05); background: #fff; }
   .car-btn.prev { left: 1rem; }
   .car-btn.next { right: 1rem; }
 
   .car-dots { position: absolute; left: 0; right: 0; bottom: .9rem; display: flex; gap: .5rem; justify-content: center; }
-  .car-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in oklab, var(--bg) 40%, transparent); cursor: pointer; }
+  .car-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in oklab, var(--bg) 40%, transparent); cursor: pointer; transition: all .25s ease; }
   .car-dot.current { background: color-mix(in oklab, var(--primary) 55%, transparent); border-color: transparent; width: 22px; }
 
   /* Contact */
@@ -195,7 +202,9 @@
     background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
     display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.4rem; align-items: center; padding: clamp(1.25rem, 2.5vw, 2.5rem);
     box-shadow: var(--shadow-md);
+    transition: transform .25s ease, box-shadow .25s ease;
   }
+  .contact:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
   .contact p { margin: 0.25rem 0; font-size: 1.08rem; }
   .contact a { color: var(--primary); font-weight: 700; text-decoration: none; }
   .qr { text-align: center; }
@@ -240,7 +249,6 @@
 <body>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="container hero-inner">
@@ -255,7 +263,6 @@
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
     <section id="capabilities" class="section">
       <div class="container reveal reveal-stagger">
         <h2 class="section-title">End‑to‑End Capabilities</h2>
@@ -270,7 +277,6 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="section">
       <div class="container reveal">
         <h2 class="section-title">Featured Projects</h2>
@@ -305,7 +311,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container reveal">
         <h2 class="section-title">Contact Us</h2>
@@ -330,103 +335,6 @@
   </footer>
 
 <script>
-  /* --- i18n: auto‑switch EN/TR by locale with manual toggle --- */
-  (function () {
-    const STRINGS = {
-      en: {
-        metaTitle: 'LOTSTE – Science • Technology • Engineering',
-        metaDesc: 'LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics.',
-        heroCTAs: { capabilities: 'End‑to‑End Capabilities', projects: 'Featured Projects', contact: 'Contact Us' },
-        cap: {
-          title: 'End‑to‑End Capabilities',
-          subtitle: 'Join us in empowering solutions for'
-        },
-        cards: ['🚀 Rocketry','✈️ Unmanned Aerial Vehicles','🤖 Digital Engineering & AI','💻 Software Development','🦾 Robotics'],
-        projects: {
-          title: 'Featured Projects',
-          subtitle: 'A snapshot of platforms and technologies we are advancing.',
-          slides: [
-            { title: 'Model-Based UAV System with an authoritative digital surrogate', desc: 'The traditional lifecycle of unmanned systems is being fundamentally redefined. Through the application of Model-Based Systems Engineering (MBSE), our platforms are virtually perfected prior to manufacturing, eliminating design risks. Once deployed, each asset operates in tandem with an authoritative digital surrogate, creating a closed-loop system that enables predictive maintenance, continuous learning, and a new standard of operational intelligence.' },
-            { title: 'Airborne Communications Relay', desc: "Our Airborne Communications Relay is engineered to provide temporary infrastructure by packaging a complete network node into a rapidly deployable UAV. This system is designed to provide on-demand 4G/5G and Wi-Fi coverage, establishing a high-bandwidth 'network in the sky' in under 30 minutes. It serves as an agile solution for everything from public event overload to critical operations in infrastructure-denied zones." },
-            { title: 'GNSS/INS-denied rocket navigation', desc: "Project Ghost addresses the most catastrophic guidance failure scenario: the simultaneous loss of both GNSS and INS data. In this event, our system is engineered to resurrect its sense of direction by reconstructing a missile's complete state vector using only non-inertial, environmental-sensing techniques. It achieves this by treating the surrounding environment as a complex map of visual, magnetic, and radio landmarks, allowing it to re-establish its position and heading from absolute scratch. This fundamental shift from internal dead-reckoning to external environmental awareness creates a profoundly resilient system capable of surviving and completing its mission even after a total loss of its primary senses." }
-          ]
-        },
-        contact: { title: 'Contact Us', lead: 'For inquiries, partnerships, and more:', location: 'Ankara, Türkiye' },
-        footer: { copyright: '© {year} LOTSTE. All rights reserved.' },
-        a11y: { carousel: 'Featured projects carousel', prev: 'Previous slide', next: 'Next slide' }
-      },
-      tr: {
-        metaTitle: 'LOTSTE – Bilim • Teknoloji • Mühendislik',
-        metaDesc: 'LOTSTE; Roketçilik, İHA, Dijital Mühendislik ve Yapay Zekâ, Yazılım Geliştirme ve Robotik alanlarında çözümler geliştirir.',
-        heroCTAs: { capabilities: 'Uçtan Uca Yetkinlikler', projects: 'Öne Çıkan Projeler', contact: 'Bize Ulaşın' },
-        cap: {
-          title: 'Uçtan Uca Yetkinlikler',
-          subtitle: 'Birlikte güç kattığımız alanlar'
-        },
-        cards: ['🚀 Roketçilik','✈️ İnsansız Hava Araçları','🤖 Dijital Mühendislik & Yapay Zekâ','💻 Yazılım Geliştirme','🦾 Robotik'],
-        projects: {
-          title: 'Öne Çıkan Projeler',
-          subtitle: 'Geliştirdiğimiz platform ve teknolojilerden bir kesit.',
-          slides: [
-            { title: 'Yetkin bir dijital ikiz ile Model Tabanlı İHA Sistemi', desc: 'İnsansız sistemlerin geleneksel yaşam döngüsü temelden yeniden tanımlanıyor. Model Tabanlı Sistemler Mühendisliği (MBSE) uygulamasıyla platformlarımız, tasarım risklerini ortadan kaldırarak üretimden önce sanal olarak mükemmelleştirilir. Her bir varlık, konuşlandırıldıktan sonra, kestirimci bakım, sürekli öğrenme ve yeni bir operasyonel zeka standardı sağlayan kapalı döngü bir sistem oluşturarak yetkin bir dijital ikiz ile birlikte çalışır.' },
-            { title: 'Hava Konuşlu Haberleşme Rölesi', desc: "Hava Konuşlu Haberleşme Rölemiz, hızla konuşlandırılabilen bir İHA'ya tam bir ağ düğümü paketleyerek geçici altyapı sağlamak üzere tasarlanmıştır. Bu sistem, 30 dakikadan daha kısa sürede yüksek bant genişliğine sahip bir 'gökyüzü ağı' kurarak isteğe bağlı 4G/5G ve Wi-Fi kapsama alanı sağlamak için tasarlanmıştır. Halka açık etkinliklerdeki aşırı yüklenmeden altyapıdan yoksun bölgelerdeki kritik operasyonlara kadar her şey için çevik bir çözüm olarak hizmet vermektedir." },
-            { title: 'GNSS/INS-desteksiz roket navigasyonu', desc: "Ghost Projesi, en yıkıcı güdüm arızası senaryosunu ele alır: hem GNSS hem de INS verilerinin aynı anda kaybedilmesi. Bu durumda sistemimiz, bir füzenin tam durum vektörünü yalnızca eylemsiz olmayan, çevresel algılama teknikleri kullanarak yeniden oluşturarak yön duygusunu yeniden canlandırmak üzere tasarlanmıştır. Bunu, çevresindeki ortamı görsel, manyetik ve radyo işaretlerinden oluşan karmaşık bir harita olarak ele alarak başarır ve konumunu ve yönünü mutlak sıfırdan yeniden belirlemesine olanak tanır. Dahili ataletsel navigasyondan harici çevresel farkındalığa doğru bu temel geçiş, birincil duyularının tamamen kaybedilmesinden sonra bile hayatta kalabilen ve görevini tamamlayabilen son derece dayanıklı bir sistem oluşturur." }
-          ]
-        },
-        contact: { title: 'İletişim', lead: 'Sorularınız, iş birlikleri ve daha fazlası için:', location: 'Ankara, Türkiye' },
-        footer: { copyright: '© {year} LOTSTE. Tüm hakları saklıdır.' },
-        a11y: { carousel: 'Öne çıkan projeler karuseli', prev: 'Önceki slayt', next: 'Sonraki slayt' }
-      }
-    };
-
-    const $ = (sel) => document.querySelector(sel);
-    const $$ = (sel) => document.querySelectorAll(sel);
-
-    function applyI18n(lang) {
-      const s = STRINGS[lang] || STRINGS.en;
-      document.documentElement.lang = lang;
-      document.title = s.metaTitle;
-      const md = document.querySelector('meta[name="description"]');
-      if (md) md.setAttribute('content', s.metaDesc);
-
-      // Hero CTAs
-      document.querySelector('.hero-actions a[href="#capabilities"]')?.replaceChildren(s.heroCTAs.capabilities);
-      document.querySelector('.hero-actions a[href="#projects"]')?.replaceChildren(s.heroCTAs.projects);
-      document.querySelector('.hero-actions a[href="#contact"]')?.replaceChildren(s.heroCTAs.contact);
-
-      // Capabilities
-      $('#capabilities .section-title')?.replaceChildren(s.cap.title);
-      $('#capabilities .section-subtitle')?.replaceChildren(s.cap.subtitle);
-      $$('#capabilities .cap-card h3').forEach((el, i) => { if (s.cards[i]) el.innerHTML = s.cards[i]; });
-
-      // Projects
-      $('#projects .section-title')?.replaceChildren(s.projects.title);
-      $('#projects .section-subtitle')?.replaceChildren(s.projects.subtitle);
-      const titles = $$('#projects .project h3');
-      const descs = $$('#projects .project p');
-      s.projects.slides.forEach((sl, i) => { titles[i] && (titles[i].textContent = sl.title); descs[i] && (descs[i].textContent = sl.desc); });
-      document.querySelector('.carousel')?.setAttribute('aria-label', s.a11y.carousel);
-      document.getElementById('carPrev')?.setAttribute('aria-label', s.a11y.prev);
-      document.getElementById('carNext')?.setAttribute('aria-label', s.a11y.next);
-
-      // Contact
-      $('#contact .section-title')?.replaceChildren(s.contact.title);
-      const subtle = $$('#contact .contact .subtle');
-      subtle[0] && (subtle[0].textContent = s.contact.lead);
-      subtle[1] && (subtle[1].textContent = s.contact.location);
-
-      // Footer
-      const year = String(new Date().getFullYear());
-      const copy = s.footer.copyright.replace('{year}', year);
-      $('footer .copyright')?.replaceChildren(copy);
-    }
-
-    // Detect preferred language & apply
-    let lang = localStorage.getItem('lang') || ((navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('tr') ? 'tr' : 'en');
-    applyI18n(lang);
-  })();
-
-
   // On-scroll reveal
   (function() {
     const observer = new IntersectionObserver((entries, obs) => {
