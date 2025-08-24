@@ -161,10 +161,17 @@
     box-sizing: border-box; /* Ensures padding is included in the 100% width */
   }
   .project {
-    height: 360px; border-radius: var(--radius); border: 1px dashed var(--border);
+    min-height: 360px; /* Changed from fixed height */
+    height: 100%;
+    border-radius: var(--radius); border: 1px dashed var(--border);
     background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 90%, transparent) 0%, transparent 100%);
-    display: grid; place-content: center; text-align: center; gap: .5rem; color: var(--muted);
-    padding: 1rem;
+    display: flex; /* Changed to flex for better alignment */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; gap: .5rem; color: var(--muted);
+    padding: 1.5rem;
+    box-sizing: border-box;
   }
   .project h3 { margin: 0; color: var(--text); font-size: 1.3rem; }
   .project p { font-size: 1rem; max-width: 60ch; margin-inline: auto; }
@@ -286,7 +293,7 @@
               <div class="carousel-slide">
                 <div class="project">
                   <h3>GNSS/INS-denied rocket navigation</h3>
-                  <p>This project addresses the most catastrophic guidance failure scenario: the simultaneous loss of both GNSS and INS data. In this event, our system is engineered to resurrect its sense of direction by reconstructing a missile's complete state vector using only non-inertial, environmental-sensing techniques. It achieves this by treating the surrounding environment as a complex map of visual, magnetic, and radio landmarks, allowing it to re-establish its position and heading from absolute scratch. This fundamental shift from internal dead-reckoning to external environmental awareness creates a profoundly resilient system capable of surviving and completing its mission even after a total loss of its primary senses.</p>
+                  <p>Project Ghost addresses the most catastrophic guidance failure scenario: the simultaneous loss of both GNSS and INS data. In this event, our system is engineered to resurrect its sense of direction by reconstructing a missile's complete state vector using only non-inertial, environmental-sensing techniques. It achieves this by treating the surrounding environment as a complex map of visual, magnetic, and radio landmarks, allowing it to re-establish its position and heading from absolute scratch. This fundamental shift from internal dead-reckoning to external environmental awareness creates a profoundly resilient system capable of surviving and completing its mission even after a total loss of its primary senses.</p>
                 </div>
               </div>
             </div>
@@ -463,6 +470,19 @@
       slides.forEach((slide, i) => {
         slide.style.minWidth = width + 'px';
       });
+
+      // Set height of all slides to match the tallest one
+      let maxHeight = 0;
+      slides.forEach(slide => {
+        slide.style.height = 'auto'; // Reset height to get natural height
+        if (slide.offsetHeight > maxHeight) {
+          maxHeight = slide.offsetHeight;
+        }
+      });
+      slides.forEach(slide => {
+        slide.style.height = `${maxHeight}px`;
+      });
+
       moveTo(index, false);
     };
 
@@ -530,4 +550,3 @@
 </script>
 </body>
 </html>
-
