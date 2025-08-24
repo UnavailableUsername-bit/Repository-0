@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LOTSTE – Science • Technology • Engineering</title>
-<meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI in Aerospace, Software Development, and Robotics." />
+<meta name="description" content="LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics." />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -196,9 +196,6 @@
 
   /* Footer */
   footer { background: var(--bg-elev); border-top: 1px solid var(--border); padding: 3rem 0 2rem; margin-top: 3rem; }
-  .footer-links { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
-  .footer-links a { color: var(--muted); text-decoration: none; padding: .25rem .5rem; border-radius: 8px; }
-  .footer-links a:hover { color: var(--text); background: color-mix(in oklab, var(--primary) 10%, transparent); }
   .copyright { margin-top: 1rem; color: var(--muted); font-size: .95rem; text-align: center; }
 
   /* On-scroll reveal */
@@ -321,12 +318,6 @@
 
   <footer>
     <div class="container">
-      <nav class="footer-links" aria-label="Footer">
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="careers.html">Careers</a>
-        <a href="contact.html">Contact</a>
-      </nav>
       <p class="copyright">&copy; 2025 LOTSTE. All rights reserved.</p>
     </div>
   </footer>
@@ -338,7 +329,6 @@
       en: {
         metaTitle: 'LOTSTE – Science • Technology • Engineering',
         metaDesc: 'LOTSTE empowers solutions in Rocketry, UAVs, Digital Engineering & AI, Software Development, and Robotics.',
-        nav: { home: 'Home', about: 'About Us', services: 'Services', careers: 'Careers', contact: 'Contact' },
         heroCTAs: { capabilities: 'End‑to‑End Capabilities', projects: 'Featured Projects', contact: 'Contact Us' },
         cap: {
           title: 'End‑to‑End Capabilities',
@@ -355,13 +345,12 @@
           ]
         },
         contact: { title: 'Contact Us', lead: 'For inquiries, partnerships, and more:', location: 'Ankara, Türkiye' },
-        footer: { about: 'About', services: 'Services', careers: 'Careers', contact: 'Contact', copyright: '© {year} LOTSTE. All rights reserved.' },
-        a11y: { carousel: 'Featured projects carousel', prev: 'Previous slide', next: 'Next slide', footerNav: 'Footer' }
+        footer: { copyright: '© {year} LOTSTE. All rights reserved.' },
+        a11y: { carousel: 'Featured projects carousel', prev: 'Previous slide', next: 'Next slide' }
       },
       tr: {
         metaTitle: 'LOTSTE – Bilim • Teknoloji • Mühendislik',
         metaDesc: 'LOTSTE; Roketçilik, İHA, Dijital Mühendislik ve Yapay Zekâ, Yazılım Geliştirme ve Robotik alanlarında çözümler geliştirir.',
-        nav: { home: 'Ana Sayfa', about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim' },
         heroCTAs: { capabilities: 'Uçtan Uca Yetkinlikler', projects: 'Öne Çıkan Projeler', contact: 'Bize Ulaşın' },
         cap: {
           title: 'Uçtan Uca Yetkinlikler',
@@ -378,8 +367,8 @@
           ]
         },
         contact: { title: 'İletişim', lead: 'Sorularınız, iş birlikleri ve daha fazlası için:', location: 'Ankara, Türkiye' },
-        footer: { about: 'Hakkımızda', services: 'Hizmetler', careers: 'Kariyer', contact: 'İletişim', copyright: '© {year} LOTSTE. Tüm hakları saklıdır.' },
-        a11y: { carousel: 'Öne çıkan projeler karuseli', prev: 'Önceki slayt', next: 'Sonraki slayt', footerNav: 'Alt menü' }
+        footer: { copyright: '© {year} LOTSTE. Tüm hakları saklıdır.' },
+        a11y: { carousel: 'Öne çıkan projeler karuseli', prev: 'Önceki slayt', next: 'Sonraki slayt' }
       }
     };
 
@@ -420,11 +409,6 @@
       subtle[1] && (subtle[1].textContent = s.contact.location);
 
       // Footer
-      const fl = $$('footer .footer-links a');
-      if (fl.length >= 4) {
-        fl[0].textContent = s.footer.about; fl[1].textContent = s.footer.services; fl[2].textContent = s.footer.careers; fl[3].textContent = s.footer.contact;
-      }
-      document.querySelector('footer .footer-links')?.setAttribute('aria-label', s.a11y.footerNav);
       const year = String(new Date().getFullYear());
       const copy = s.footer.copyright.replace('{year}', year);
       $('footer .copyright')?.replaceChildren(copy);
@@ -433,19 +417,6 @@
     // Detect preferred language & apply
     let lang = localStorage.getItem('lang') || ((navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('tr') ? 'tr' : 'en');
     applyI18n(lang);
-
-    // Toggle button
-    const switchBtn = document.getElementById('langSwitch');
-    if (switchBtn) {
-      const setBtn = () => { switchBtn.textContent = (lang === 'tr' ? 'EN' : 'TR'); switchBtn.setAttribute('aria-label', lang === 'tr' ? 'Dili değiştir' : 'Change language'); };
-      setBtn();
-      switchBtn.addEventListener('click', () => {
-        lang = lang === 'tr' ? 'en' : 'tr';
-        localStorage.setItem('lang', lang);
-        applyI18n(lang);
-        setBtn();
-      });
-    }
   })();
 
 
